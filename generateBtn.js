@@ -14,21 +14,24 @@ var integerNum = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,];
 var biggieLetter = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 var littleLetter =["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z",];
 var newArray = [];
-var passCode
+var finalPw = '';
 
 
 
 function generatePassword() {
-
+  newArray = []; 
+  finalPw = ''; 
   
   
   
   
-  var gettingInput = promptUser();
-  console.log(gettingInput);
-  
-  
-}
+  var userAnswer = promptUser();
+  console.log(userAnswer);
+  gettingRandom(userAnswer);
+  console.log(newArray);
+  return finalPw ;  // to do - return generated password 
+  // take in options 
+} 
 
 function promptUser(){
   var pwLengthStr = prompt('How many characters do you want in your password ?');
@@ -39,7 +42,7 @@ function promptUser(){
   var pwLength = parseInt(pwLengthStr);
   
   
-  //put my object here 
+  //put my object here,
   
   var userAnswer = {
     pwLength : pwLength,
@@ -53,39 +56,32 @@ function promptUser(){
   
 }
 
-function gettingRandom () {
-  // if (wantsNumber === true) {
-    // var getThatNum = Math.floor(Math.random() * integerNum.length);
-    
-    // } if (specialChar === true) {
-      //   var symbolPick = Math.floor(Math.random() * specialCharacter.length);
-      
-      // } if (bigLetter === true) {
-        //   var getCapital = Math.floor(math.random() * biggieLetter.length);
-        
-        // } if (smallLetter === true) {
-          //   var gettingSmall = Math.floor(Math.random() * littleLetter.length);
-          
-          // } 
-          
-          
-          if (wantsNumber) {
-            var newArray = [].push(integerNum);
-          } if (specialChar) {
-            newArray = [].concat(specialCharacter);
-          } if (bigLetter) {
-            newArray = [].concat(biggieLetter);
-          } if (smallLetter) {
-            newArray = [].concat(littleLetter);
-          }
-          return newArray;
-        }
+function gettingRandom (userAnswer) {
+  
+  if (userAnswer.wantsNumber === true) {
+      newArray = newArray.concat(integerNum);
+  } 
+  if (userAnswer.specialChar === true) {
+    newArray = newArray.concat(specialCharacter);
+  } 
+  if (userAnswer.bigLetter === true) {
+    newArray = newArray.concat(biggieLetter);
+  } 
+  if (userAnswer.smallLetter === true) {
+    newArray = newArray.concat(littleLetter);
+  }
+  
+  for (var i=0; i < userAnswer.pwLength; i++) {
+    var tryingTogetpw = Math.floor(Math.random() * newArray.length);
+    finalPw += newArray[tryingTogetpw];
+
+  }
+  
+}
 
 
 
-          for (i =0; i < pwLength; i++) {
-            var tryingTogetpw = Math.floor(Math.random() * newArray.length);
-          }
+
         
         
         
